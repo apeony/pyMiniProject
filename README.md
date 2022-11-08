@@ -1,0 +1,2 @@
+# pyMiniProject
+pygame mini project
