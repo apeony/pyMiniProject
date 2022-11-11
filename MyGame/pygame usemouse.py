@@ -6,9 +6,14 @@ import os
 SCREEN_WIDTH =800
 SCREEN_HEIGHT =800
 
-
-YELLOW=(243,220,45)
-
+BLACK=(0,0,0)
+WHITE=(255,255,255)
+RED=(239,82,108)
+GREEN=(119,185,113)
+BLUE=(116,194,208)
+YELLOW=(239,226,68)
+PINK=(231,165,199)
+TILBLUE=(141,219,211)
 
 #초기화
 pygame.init()
@@ -28,11 +33,12 @@ current_path=os.path.dirname(__file__)
 assets_path=os.path.join(current_path,'assets')
 
 #이미지 로드
-keyboard_image=pygame.image.load(os.path.join(assets_path,'blueberrypet.png'))
-keyboard_x=int(SCREEN_WIDTH/2)
-keyboard_y=int(SCREEN_HEIGHT/2)
-keyboard_dx=0
-keyboard_dy=0
+mouse_image=pygame.image.load(os.path.join(assets_path,'tmtori.png'))
+mouse_x=int(SCREEN_WIDTH/2)
+mouse_y=int(SCREEN_HEIGHT/2)
+
+#마우스 숨김
+pygame.mouse.set_visible(False)
 
 # 게임 종료 전까지 반복
 done=False
@@ -46,39 +52,23 @@ while not done:
       
          done = True #반복 중단으로 게임 종료
          
-      #키보드 조작
-      #키보드 눌릴 경우
-      elif event.type == pygame.KEYDOWN:
-         if event.key==pygame.K_LEFT:
-            keyboard_dx=-3
-         elif event.key==pygame.K_RIGHT:
-            keyboard_dx=5
-         elif event.key==pygame.K_UP:
-            keyboard_dy=-3
-         elif event.key==pygame.K_DOWN:
-            keyboard_dy=3
-      #키보드 놓일 경우
-      elif event.type==pygame.KEYUP:
-         if event.key==pygame.K_LEFT or event.key== pygame.K_RIGHT:
-            keyboard_dx=0
-         elif event.key==pygame.K_UP or event.key== pygame.K_DOWN:
-            keyboard_dy=0
-            
-            
          
    # 게임 로직 구간
-   #이미지 위치변경
-   keyboard_x +=keyboard_dx
-   keyboard_y +=keyboard_dy
+   
+   #마우스 위치값 가져오기
+   pos= pygame.mouse.get_pos()
+   mouse_x=pos[0]
+   mouse_y=pos[1]
+   
    # 화면 삭제 구간         
          
    #스크린채우기
-   screen.fill(YELLOW)
+   screen.fill(GREEN)
 
 
    #화면 그리기 구간
-   #키보드 이미지 그리기 
-   screen.blit(keyboard_image,[keyboard_x,keyboard_y])
+   #마우스 이미지 그리기 
+   screen.blit(mouse_image,[mouse_x,mouse_y])
    
    #화면 업데이트
    pygame.display.flip()
