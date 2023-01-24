@@ -73,6 +73,9 @@ class Tomato():
    def draw(self,screen):
       tomatohead,tomatobody,tomatotail=50/(self.length -1),150,150 /(self.length -1)
       for i, p in enumerate(self.position):
+         tomatohead=(100+tomatohead*i)
+         rect=pygame.Rect((p[0],p[1]),(GRID_SIZE,GRID_SIZE))
+         pygame.draw.rect(screen,tomatohead,rect)
                
       
 class Feed():
@@ -80,6 +83,21 @@ class Feed():
       self.position =(0,0)
       self.color=YELLOW
       self.create()
+   def create(self):
+      x=random.randint(0, GRID_WIDTH -1)
+      y=random.randint(0, GRID_HEIGHT-1)
+      self.position=x*GRID_SIZE,y*GRID_SIZE
+   def draw(self,screen):
+      rect=pygame.Rect((self.position[0],self.position[1]),(GRID_SIZE,GRID_SIZE))
+      pygame.draw.rect(screen,self.color.rect) 
+      
+      
+class Game():
+   def __init__(self):
+      self.snake=Tomato()
+      self.feed=Feed()
+      self.speed=5
+      
          
 #초기화
 pygame.init()
